@@ -236,10 +236,10 @@ class Player {
         // random mine placement
         for _ in 0..<numberOfMines {
             var location = RandomGridLocation()
-            var mine = Mine(location: location)
+            var mine = Mine(location: location, penaltyText: "Read for the mosh pit, Boom Shaka Brah" )
             while !gridViewController.addMine(mine, playerType: .Computer) {
                 location = RandomGridLocation()
-                mine = Mine(location: location)
+                mine = Mine(location: location, penaltyText: "Read for the mosh pit, Boom Shaka Brah")
             }
         }
         

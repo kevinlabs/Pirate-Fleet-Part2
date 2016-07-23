@@ -17,14 +17,21 @@ struct GridLocation {
 
 //This struct is Ships information.
 struct Ship {
+    
+    //--Variables--
     let length: Int
     let location: GridLocation
     let isVertical: Bool
     let isWooden: Bool
+    var hitTracker: HitTracker
+    //--------------------
+    
     
     //Represnts the space a ship occupies.
-    var cells: [GridLocation] {
-        get {
+    var cells: [GridLocation]
+    {
+        get
+        {
             let start = self.location
             let end: GridLocation = ShipEndLocation(self)
             
@@ -36,17 +43,12 @@ struct Ship {
                     
                 }
             }
-            //print("printing occupiedCells", occupiedCells)
             return occupiedCells
         }
-    }
+    }//---cells
     
-
-    
-    var hitTracker: HitTracker
-// TODO: Add a getter for sunk. Calculate the value returned using hitTracker.cellsHit.
-    
-    var sunk: Bool {
+    var sunk: Bool
+    {
         //Length limits loop indee
         //location is where initial loop start
         //isVertical tells us which direction we have to add the digits.
@@ -70,7 +72,8 @@ struct Ship {
         }
         
         return false
-    }
+        
+    }//---Sunk
 
     init(length: Int, location: GridLocation, isVertical: Bool) {
         self.length = length
@@ -104,16 +107,19 @@ struct Mine: PenaltyCell {
     var guaranteesHit: Bool
     var penaltyText: String
 
-    init(location: GridLocation) {
+
+    init(location: GridLocation, penaltyText: String ) {
         self.location = location
         self.guaranteesHit = false
-        self.penaltyText = "Read for the mosh pit, Boom Shaka Brah"
+        self.penaltyText = penaltyText
+        //"Read for the mosh pit, Boom Shaka Brah"
     }
     
-    init(location: GridLocation, guaranteesHit: Bool) {
+    init(location: GridLocation, guaranteesHit: Bool, penaltyText: String) {
         self.location = location
         self.guaranteesHit = guaranteesHit
-        self.penaltyText = "Act like Sea Lion!! "
+        self.penaltyText = penaltyText
+        //"Act like Sea Lion!! "
     }
 }
 
@@ -154,10 +160,10 @@ class ControlCenter {
         print(xLargeShip.cells)
         human.addShipToGrid(xLargeShip)
         
-        let mine1 = Mine(location: GridLocation(x: 6, y: 0))
+        let mine1 = Mine(location: GridLocation(x: 6, y: 0), penaltyText: "Read for the mosh pit, Boom Shaka Brah")
         human.addMineToGrid(mine1)
         
-        let mine2 = Mine(location: GridLocation(x: 3, y: 3))
+        let mine2 = Mine(location: GridLocation(x: 3, y: 3), guaranteesHit: true , penaltyText: "Act like sea lion Shaka Brah.")
         human.addMineToGrid(mine2)
         
         let seamonster1 = SeaMonster(location: GridLocation(x: 5, y: 6))
@@ -170,9 +176,10 @@ class ControlCenter {
     func calculateFinalScore(gameStats: GameStats) -> Int {
         
         var finalScore: Int
+        let numberOfTheBoat: Int = 5
         
-        let sinkBonus = (5 - gameStats.enemyShipsRemaining) * gameStats.sinkBonus
-        let shipBonus = (5 - gameStats.humanShipsSunk) * gameStats.shipBonus
+        let sinkBonus = (numberOfTheBoat - gameStats.enemyShipsRemaining) * gameStats.sinkBonus
+        let shipBonus = (numberOfTheBoat - gameStats.humanShipsSunk) * gameStats.shipBonus
         let guessPenalty = (gameStats.numberOfHitsOnEnemy + gameStats.numberOfMissesByHuman) * gameStats.guessPenalty
         
         finalScore = sinkBonus + shipBonus - guessPenalty

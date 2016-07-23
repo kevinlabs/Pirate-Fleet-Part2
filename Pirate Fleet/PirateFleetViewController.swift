@@ -178,7 +178,7 @@ extension PirateFleetViewController: PlayerDelegate {
                 
                 let alertMessage = (player.playerType == .Human) ? Settings.Messages.HumanHitMine : Settings.Messages.ComputerHitMine
 
-                createAlertWithTitle("Boom, Shaka Brah", message: alertMessage, actionMessage: Settings.Messages.DismissAction, completionHandler: { (action) in
+                createAlertWithTitle(penaltyCell.penaltyText, message: alertMessage, actionMessage: Settings.Messages.DismissAction, completionHandler: { (action) in
                     self.dismissPenaltyAlert(player)
                 })
             }
@@ -188,7 +188,7 @@ extension PirateFleetViewController: PlayerDelegate {
                 
                 let alertMessage = (player.playerType == .Human) ? Settings.Messages.HumanHitMonster : Settings.Messages.ComputerHitMonster
                 
-                createAlertWithTitle("Lion in the sea. kwywahoo", message: alertMessage, actionMessage: Settings.Messages.DismissAction, completionHandler: { (action) in
+                createAlertWithTitle(penaltyCell.penaltyText, message: alertMessage, actionMessage: Settings.Messages.DismissAction, completionHandler: { (action) in
                     self.dismissPenaltyAlert(player)
                 })
             }
