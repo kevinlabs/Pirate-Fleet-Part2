@@ -131,7 +131,7 @@ struct SeaMonster: PenaltyCell {
     
     init(location: GridLocation, penaltyText: String ) {
         self.location = location
-        self.guaranteesHit = false
+        self.guaranteesHit = true
         self.penaltyText = penaltyText
     }
 
