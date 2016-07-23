@@ -129,11 +129,12 @@ struct SeaMonster: PenaltyCell {
     var guaranteesHit: Bool
     var penaltyText: String
     
-    init(location: GridLocation) {
+    init(location: GridLocation, penaltyText: String ) {
         self.location = location
-        self.guaranteesHit = true
-        self.penaltyText = "Monster is in the Pit"
+        self.guaranteesHit = false
+        self.penaltyText = penaltyText
     }
+
 }
 
 class ControlCenter {
@@ -166,10 +167,10 @@ class ControlCenter {
         let mine2 = Mine(location: GridLocation(x: 3, y: 3), guaranteesHit: true , penaltyText: "Act like sea lion Shaka Brah.")
         human.addMineToGrid(mine2)
         
-        let seamonster1 = SeaMonster(location: GridLocation(x: 5, y: 6))
+        let seamonster1 = SeaMonster(location: GridLocation(x: 5, y: 6), penaltyText: "Monster is in the Pit")
         human.addSeamonsterToGrid(seamonster1)
         
-        let seamonster2 = SeaMonster(location: GridLocation(x: 2, y: 2))
+        let seamonster2 = SeaMonster(location: GridLocation(x: 2, y: 2), penaltyText: "Monster is in the Pit")
         human.addSeamonsterToGrid(seamonster2)
     }
     
